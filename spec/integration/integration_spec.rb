@@ -29,6 +29,12 @@ describe Vehicle do
     end
   end
 
+  shared_examples 'speedless' do
+    it 'does not respond to speed' do
+      expect { vehicle.speed }.to raise_error NoMethodError
+    end
+  end
+
   describe '#initialize' do
     its(:seatbelt_on) { should be_false }
     its(:time_used) { should eq 0 }
@@ -141,10 +147,7 @@ describe Vehicle do
       its(:can_repair?) { should be_true }
 
       it { should_not be_moving }
-
-      it 'does not respond to speed' do
-        expect { vehicle.speed }.to raise_error NoMethodError
-      end
+      it_behaves_like 'speedless'
 
       describe 'ignite' do
         it 'remains stalled' do
@@ -222,10 +225,7 @@ describe Vehicle do
       its(:can_repair?) { should be_false }
 
       it { should be_moving }
-
-      it 'does not respond to speed' do
-        expect { vehicle.speed }.to raise_error NoMethodError
-      end
+      it_behaves_like 'speedless'
 
       describe 'shift up' do
         it 'shifts into third gear' do
@@ -256,10 +256,7 @@ describe Vehicle do
       its(:can_repair?) { should be_false }
 
       it { should be_moving }
-
-      it 'does not respond to speed' do
-        expect { vehicle.speed }.to raise_error NoMethodError
-      end
+      it_behaves_like 'speedless'
 
       describe 'shift down' do
         it 'shifts back into second gear' do

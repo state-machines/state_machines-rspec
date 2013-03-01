@@ -413,6 +413,55 @@ describe Vehicle do
         vehicle.repair!
       end
     end
+  end
 
+  describe 'alarm state machine' do
+    it 'has an initial state of activated' do
+      vehicle.alarm_active?.should be_true
+    end
+
+    context 'when active' do
+      its(:alarm_state) { should eq 1 }
+
+      its(:can_enable_alarm?) { should be_true }
+      its(:can_disable_alarm?) { should be_true }
+
+      describe 'enable' do
+        it 'becomes active' do
+          vehicle.enable_alarm!
+          vehicle.alarm_active?.should be_true
+        end
+      end
+
+      describe 'disable' do
+        it 'turns the alarm off' do
+          vehicle.disable_alarm!
+          vehicle.alarm_off?.should be_true
+        end
+      end
+    end
+
+    context 'when off' do
+      before { vehicle.alarm_state = 0 }
+
+      its(:alarm_state) { should be_zero }
+
+      its(:can_enable_alarm?) { should be_true }
+      its(:can_disable_alarm?) { should be_true }
+
+      describe 'enable' do
+        it 'becomes active' do
+          vehicle.enable_alarm!
+          vehicle.alarm_active?.should be_true
+        end
+      end
+
+      describe 'disable' do
+        it 'turns the alarm off' do
+          vehicle.disable_alarm!
+          vehicle.alarm_off?.should be_true
+        end
+      end
+    end
   end
 end

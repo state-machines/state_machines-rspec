@@ -70,13 +70,9 @@ describe Vehicle do
     context 'when parked' do
       before { vehicle.state = :parked.to_s }
 
-      its(:can_park?) { should be_false }
-      its(:can_ignite?) { should be_true }
-      its(:can_idle?) { should be_false }
-      its(:can_shift_up?) { should be_false }
-      its(:can_shift_down?) { should be_false }
-      its(:can_crash?) { should be_false }
-      its(:can_repair?) { should be_false }
+      it { should respond_to_event :ignite }
+      it { should_not respond_to_events :park, :idle, :shift_up,
+                                        :shift_down, :crash, :repair }
 
       its(:speed) { should be_zero }
       it { should_not be_moving }
@@ -107,13 +103,8 @@ describe Vehicle do
     context 'when idling' do
       before { vehicle.state = :idling.to_s }
 
-      its(:can_park?) { should be_true }
-      its(:can_ignite?) { should be_false }
-      its(:can_idle?) { should be_false }
-      its(:can_shift_up?) { should be_true }
-      its(:can_shift_down?) { should be_false }
-      its(:can_crash?) { should be_true }
-      its(:can_repair?) { should be_false }
+      it { should respond_to_events :park, :shift_up, :crash }
+      it { should_not respond_to_events :ignite, :idle, :shift_down, :repair }
 
       its(:speed) { should eq 10 }
       it { should_not be_moving }
@@ -138,13 +129,9 @@ describe Vehicle do
     context 'when stalled' do
       before { vehicle.state = :stalled.to_s }
 
-      its(:can_park?) { should be_false }
-      its(:can_ignite?) { should be_true }
-      its(:can_idle?) { should be_false }
-      its(:can_shift_up?) { should be_false }
-      its(:can_shift_down?) { should be_false }
-      its(:can_crash?) { should be_false }
-      its(:can_repair?) { should be_true }
+      it { should respond_to_events :ignite, :repair }
+      it { should_not respond_to_events :park, :idle, :shift_up,
+                                        :shift_down, :crash }
 
       it { should_not be_moving }
       it_behaves_like 'speedless'
@@ -178,13 +165,8 @@ describe Vehicle do
     context 'when in first gear' do
       before { vehicle.state = :first_gear.to_s }
 
-      its(:can_park?) { should be_true }
-      its(:can_ignite?) { should be_false }
-      its(:can_idle?) { should be_true }
-      its(:can_shift_up?) { should be_true }
-      its(:can_shift_down?) { should be_false }
-      its(:can_crash?) { should be_true }
-      its(:can_repair?) { should be_false }
+      it { should respond_to_events :park, :idle, :shift_up, :crash }
+      it { should_not respond_to_events :ignite, :shift_down, :repair }
 
       its(:speed) { should eq 10 }
       it { should be_moving }
@@ -216,13 +198,8 @@ describe Vehicle do
     context 'when in second gear' do
       before { vehicle.state = :second_gear.to_s }
 
-      its(:can_park?) { should be_false }
-      its(:can_ignite?) { should be_false }
-      its(:can_idle?) { should be_false }
-      its(:can_shift_up?) { should be_true }
-      its(:can_shift_down?) { should be_true }
-      its(:can_crash?) { should be_true }
-      its(:can_repair?) { should be_false }
+      it { should respond_to_events :shift_up, :shift_down, :crash }
+      it { should_not respond_to_events :park, :ignite, :idle, :repair  }
 
       it { should be_moving }
       it_behaves_like 'speedless'
@@ -247,13 +224,9 @@ describe Vehicle do
     context 'when in third gear' do
       before { vehicle.state = :third_gear.to_s }
 
-      its(:can_park?) { should be_false }
-      its(:can_ignite?) { should be_false }
-      its(:can_idle?) { should be_false }
-      its(:can_shift_up?) { should be_false }
-      its(:can_shift_down?) { should be_true }
-      its(:can_crash?) { should be_true }
-      its(:can_repair?) { should be_false }
+      it { should respond_to_events :shift_down, :crash }
+      it { should_not respond_to_events :park, :ignite, :idle,
+                                        :shift_up, :repair }
 
       it { should be_moving }
       it_behaves_like 'speedless'
@@ -303,8 +276,7 @@ describe Vehicle do
     context 'when active' do
       its(:alarm_state) { should eq 1 }
 
-      its(:can_enable_alarm?) { should be_true }
-      its(:can_disable_alarm?) { should be_true }
+      it { should respond_to_events :enable_alarm, :disable_alarm }
 
       describe 'enable' do
         it 'becomes active' do
@@ -326,8 +298,7 @@ describe Vehicle do
 
       its(:alarm_state) { should be_zero }
 
-      its(:can_enable_alarm?) { should be_true }
-      its(:can_disable_alarm?) { should be_true }
+      it { should respond_to_events :enable_alarm, :disable_alarm }
 
       describe 'enable' do
         it 'becomes active' do

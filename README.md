@@ -16,9 +16,23 @@ Or install it yourself as:
 
     $ gem install state_machine_rspec
 
-## Usage
+## Matchers
 
-TODO: Write usage instructions here
+### `respond_to_events`
+
+```ruby
+describe Vehicle do
+  let(:vehicle) { Vehicle.new }
+  context 'when in third gear' do
+    before { vehicle.state = :third_gear.to_s }
+
+    it { should respond_to_events :shift_down, :crash }
+    it { should_not respond_to_events :park, :ignite, :idle,
+                                      :shift_up, :repair }
+  end
+end
+```
+
 
 ## Contributing
 

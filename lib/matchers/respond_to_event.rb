@@ -14,12 +14,11 @@ module StateMachineRspec
 
       def matches?(subject)
         failed_events = @events.reject { |e| subject.send("can_#{e}?") }
-        if failed_events.empty?
-          true
-        else
+        unless failed_events.empty?
           @failure_message = "Expected to be able to respond to: #{failed_events.join(', ')}"
-          false
         end
+
+        failure_message.nil?
       end
     end
   end

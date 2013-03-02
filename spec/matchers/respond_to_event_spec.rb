@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe StateMachineRspec::Matchers::RespondToEventMatcher do
   describe '#matches?' do
     context 'when subject can perform events' do

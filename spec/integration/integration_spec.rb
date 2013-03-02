@@ -52,6 +52,9 @@ describe Vehicle do
   end
 
   describe 'state machine' do
+    it { should have_states :state, :parked, :idling, :stalled,
+                            :first_gear, :second_gear, :third_gear }
+
     it 'has an initial state of "parked"' do
       vehicle.should be_parked
     end
@@ -269,6 +272,8 @@ describe Vehicle do
   end
 
   describe 'alarm state machine' do
+    it { should have_states :alarm_state, :active, :off }
+
     it 'has an initial state of activated' do
       vehicle.alarm_active?.should be_true
     end

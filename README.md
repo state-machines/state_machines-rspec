@@ -18,6 +18,14 @@ Or install it yourself as:
 
 ## Matchers
 
+### `have_state`
+
+```ruby
+describe Vehicle do
+  it { should have_states :alarm_state, :active, :off }
+end
+```
+
 ### `respond_to_events`
 
 ```ruby

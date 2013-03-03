@@ -44,7 +44,6 @@ describe Vehicle do
   describe '#put_on_seatbelt' do
     it 'sets seatbelt_on to true' do
       vehicle.seatbelt_on = false
-
       vehicle.put_on_seatbelt
 
       vehicle.seatbelt_on.should be_true
@@ -272,15 +271,14 @@ describe Vehicle do
   end
 
   describe 'alarm state machine' do
-    it { should have_states :alarm_state, :active, :off }
+    it { should have_state :alarm_state, :active, value: 1 }
+    it { should have_state :alarm_state, :off, value: 0 }
 
     it 'has an initial state of activated' do
       vehicle.alarm_active?.should be_true
     end
 
     context 'when active' do
-      its(:alarm_state) { should eq 1 }
-
       it { should respond_to_events :enable_alarm, :disable_alarm }
 
       describe 'enable' do
@@ -300,8 +298,6 @@ describe Vehicle do
 
     context 'when off' do
       before { vehicle.alarm_state = 0 }
-
-      its(:alarm_state) { should be_zero }
 
       it { should respond_to_events :enable_alarm, :disable_alarm }
 

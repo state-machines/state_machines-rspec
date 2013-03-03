@@ -23,6 +23,7 @@ Or install it yourself as:
 ```ruby
 describe Vehicle do
   it { should have_states :alarm_state, :active, :off }
+  it { should have_state :alarm_state, :active, value: 1 }
 end
 ```
 

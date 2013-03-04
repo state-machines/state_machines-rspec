@@ -31,14 +31,11 @@ end
 
 ```ruby
 describe Vehicle do
-  let(:vehicle) { Vehicle.new }
-  context 'when in third gear' do
-    before { vehicle.state = :third_gear.to_s }
-
-    it { should respond_to_events :shift_down, :crash }
-    it { should_not respond_to_events :park, :ignite, :idle,
-                                      :shift_up, :repair }
-  end
+  it { should respond_to_events :shift_down, :crash,
+                                when: :third_gear }
+  it { should_not respond_to_events :park, :ignite, :idle,
+                                    :shift_up, :repair,
+                                    when: :third_gear }
 end
 ```
 

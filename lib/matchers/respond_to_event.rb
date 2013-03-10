@@ -23,6 +23,14 @@ module StateMachineRspec
           subject.send("#{machine.attribute}=", when_states.first.value)
         end
 
+        @events.each do |e|
+          unless subject.respond_to? "can_#{e}?"
+            @failure_message = "state_machine: #{machine.attribute} does not " +
+                               "define event: #{e}"
+            return false
+          end
+        end
+
         failed_events = @events.reject { |e| subject.send("can_#{e}?") }
         unless failed_events.empty?
           @failure_message = "Expected to be able to respond to: " +
@@ -36,12 +44,10 @@ module StateMachineRspec
       private
 
       def machine
-        if state_attr = @options.fetch(:state, nil)
-          machine = @subject.class.state_machines[state_attr]
-        else
-          machine = @subject.class.state_machine
-        end
+        introspector = StateMachineIntrospector.new(@subject)
+        introspector.state_machine(@options.fetch(:state, nil))
       end
+
     end
   end
 end

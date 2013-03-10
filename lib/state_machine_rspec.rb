@@ -1,4 +1,5 @@
 require 'state_machine_rspec/version'
+require 'state_machine_rspec/state_machine_introspector'
 require 'matchers/respond_to_event'
 require 'matchers/have_state'
 

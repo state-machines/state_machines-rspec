@@ -2,6 +2,40 @@ require 'spec_helper'
 
 describe StateMachineRspec::Matchers::RespondToEventMatcher do
   describe '#matches?' do
+    context 'when :when state is specified' do
+      context 'but the state doesn\'t exist' do
+        before do
+          matcher_class = Class.new do
+            state_machine :state, initial: :mathy
+          end
+          @matcher_subject = matcher_class.new
+          @matcher = described_class.new([when: :artsy])
+        end
+
+        it 'raises' do
+          expect { @matcher.matches? @matcher_subject }.
+            to raise_error StateMachineIntrospectorError
+        end
+      end
+
+      context 'and the state exists' do
+        before do
+          matcher_class = Class.new do
+            state_machine :state, initial: :mathy do
+              state :artsy
+            end
+          end
+          @matcher_subject = matcher_class.new
+          @matcher = described_class.new([when: :artsy])
+        end
+
+        it 'sets the state' do
+          @matcher.matches? @matcher_subject
+          @matcher_subject.state.should eq 'artsy'
+        end
+      end
+    end
+
     context 'when subject can perform events' do
       before do
         matcher_class = Class.new do
@@ -62,7 +96,7 @@ describe StateMachineRspec::Matchers::RespondToEventMatcher do
 
       context 'because no such events exist' do
         before do
-          @matcher = described_class.new([:polynomialize])
+          @matcher = described_class.new([:polynomialize, :eulerasterize])
         end
 
         it 'does not raise' do
@@ -72,7 +106,7 @@ describe StateMachineRspec::Matchers::RespondToEventMatcher do
           @matcher.matches? @matcher_subject
           @matcher.failure_message.
             should eq 'state_machine: state does not ' +
-                      'define event: polynomialize'
+                      'define events: polynomialize, eulerasterize'
         end
         it 'returns false' do
           @matcher.matches?(@matcher_subject).should be_false

@@ -17,37 +17,43 @@ module StateMachineRspec
 
       def matches?(subject)
         @subject = subject
-
-        if state_name = @options.fetch(:when, nil)
-          when_states = machine.states.reject { |s| s.name != state_name }
-          subject.send("#{machine.attribute}=", when_states.first.value)
-        end
-
-        @events.each do |e|
-          unless subject.respond_to? "can_#{e}?"
-            @failure_message = "state_machine: #{machine.attribute} does not " +
-                               "define event: #{e}"
-            return false
-          end
-        end
-
-        failed_events = @events.reject { |e| subject.send("can_#{e}?") }
-        unless failed_events.empty?
-          @failure_message = "Expected to be able to respond to: " +
-                              "#{failed_events.join(', ')} in state: " +
-                              "#{subject.send(machine.attribute)}"
-        end
-
-        failure_message.nil?
+        @introspector = StateMachineIntrospector.new(@subject,
+                                                     @options.fetch(:state, nil))
+        enter_when_state
+        return false if undefined_events?
+        return false if invalid_events?
+        @failure_message.nil?
       end
 
       private
 
-      def machine
-        introspector = StateMachineIntrospector.new(@subject)
-        introspector.state_machine(@options.fetch(:state, nil))
+      def enter_when_state
+        if state_name = @options.fetch(:when, nil)
+          @subject.send("#{@introspector.state_machine_attribute}=",
+                        @introspector.state(state_name).value)
+        end
       end
 
+      def undefined_events?
+        undefined_events = @introspector.undefined_events(@events)
+        unless undefined_events.empty?
+          @failure_message = "state_machine: #{@introspector.state_machine_attribute} " +
+                             "does not define events: #{undefined_events.join(', ')}"
+        end
+
+        !undefined_events.empty?
+      end
+
+      def invalid_events?
+        invalid_events = @introspector.invalid_events(@events)
+        unless invalid_events.empty?
+          @failure_message = "Expected to be able to respond to: " +
+                              "#{invalid_events.join(', ')} in state: " +
+                              "#{@introspector.current_state_value}"
+        end
+
+        !invalid_events.empty?
+      end
     end
   end
 end

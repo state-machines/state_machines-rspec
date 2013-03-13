@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StateMachineRspec::Matchers::RespondToEventMatcher do
+describe StateMachineRspec::Matchers::HandleEventMatcher do
   describe '#matches?' do
     context 'when :when state is specified' do
       context 'but the state doesn\'t exist' do
@@ -86,7 +86,7 @@ describe StateMachineRspec::Matchers::RespondToEventMatcher do
         it 'sets a failure message' do
           @matcher.matches? @matcher_subject
           @matcher.failure_message.
-            should eq 'Expected to be able to respond to: algebraify, trigonomalize ' +
+            should eq 'Expected to be able to handle events: algebraify, trigonomalize ' +
                       'in state: mathy'
         end
         it 'returns false' do

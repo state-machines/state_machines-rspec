@@ -54,33 +54,33 @@ describe Vehicle do
     it { should have_states :state, :parked, :idling, :stalled,
                             :first_gear, :second_gear, :third_gear }
 
-    it { should respond_to_event :ignite, when: :parked }
-    it { should_not respond_to_events :park, :idle, :shift_up,
-                                      :shift_down, :crash, :repair,
-                                      when: :parked }
+    it { should handle_event :ignite, when: :parked }
+    it { should_not handle_events :park, :idle, :shift_up,
+                                  :shift_down, :crash, :repair,
+                                  when: :parked }
 
-    it { should respond_to_events :park, :shift_up, :crash, when: :idling }
-    it { should_not respond_to_events :ignite, :idle, :shift_down, :repair,
-                                      when: :idling }
+    it { should handle_events :park, :shift_up, :crash, when: :idling }
+    it { should_not handle_events :ignite, :idle, :shift_down, :repair,
+                                  when: :idling }
 
-    it { should respond_to_events :ignite, :repair, when: :stalled }
-    it { should_not respond_to_events :park, :idle, :shift_up,
-                                      :shift_down, :crash,
-                                      when: :stalled }
+    it { should handle_events :ignite, :repair, when: :stalled }
+    it { should_not handle_events :park, :idle, :shift_up,
+                                  :shift_down, :crash,
+                                  when: :stalled }
 
-    it { should respond_to_events :park, :idle, :shift_up, :crash,
+    it { should handle_events :park, :idle, :shift_up, :crash,
+                              when: :first_gear }
+    it { should_not handle_events :ignite, :shift_down, :repair,
                                   when: :first_gear }
-    it { should_not respond_to_events :ignite, :shift_down, :repair,
-                                      when: :first_gear }
 
-    it { should respond_to_events :shift_up, :shift_down, :crash,
+    it { should handle_events :shift_up, :shift_down, :crash,
+                              when: :second_gear }
+    it { should_not handle_events :park, :ignite, :idle, :repair,
                                   when: :second_gear }
-    it { should_not respond_to_events :park, :ignite, :idle, :repair,
-                                      when: :second_gear }
 
-    it { should respond_to_events :shift_down, :crash, when: :third_gear }
-    it { should_not respond_to_events :park, :ignite, :idle,
-                                      :shift_up, :repair, when: :third_gear }
+    it { should handle_events :shift_down, :crash, when: :third_gear }
+    it { should_not handle_events :park, :ignite, :idle,
+                                  :shift_up, :repair, when: :third_gear }
 
     it 'has an initial state of "parked"' do
       vehicle.should be_parked
@@ -280,10 +280,10 @@ describe Vehicle do
   describe 'alarm state machine' do
     it { should have_state :alarm_state, :active, value: 1 }
     it { should have_state :alarm_state, :off, value: 0 }
-    it { should respond_to_events :enable_alarm, :disable_alarm,
-                                  when: :active, state: :alarm_state }
-    it { should respond_to_events :enable_alarm, :disable_alarm,
-                                  when: :off, state: :alarm_state }
+    it { should handle_events :enable_alarm, :disable_alarm,
+                              when: :active, state: :alarm_state }
+    it { should handle_events :enable_alarm, :disable_alarm,
+                              when: :off, state: :alarm_state }
 
     it 'has an initial state of activated' do
       vehicle.alarm_active?.should be_true

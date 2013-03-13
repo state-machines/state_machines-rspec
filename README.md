@@ -27,15 +27,13 @@ describe Vehicle do
 end
 ```
 
-### `respond_to_events`
+### `handle_event` & `reject_event`
 
 ```ruby
 describe Vehicle do
-  it { should respond_to_events :shift_down, :crash,
-                                when: :third_gear }
-  it { should_not respond_to_events :park, :ignite, :idle,
-                                    :shift_up, :repair,
-                                    when: :third_gear }
+  it { should handle_events :shift_down, :crash, when: :third_gear }
+  it { should reject_events :park, :ignite, :idle, :shift_up, :repair,
+                            when: :third_gear }
 end
 ```
 

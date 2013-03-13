@@ -26,6 +26,10 @@ class StateMachineIntrospector
     events.reject { |e| event_defined? e }
   end
 
+  def valid_events(events)
+    events.keep_if { |e| valid_event? e }
+  end
+
   def invalid_events(events)
     events.reject { |e| valid_event? e }
   end

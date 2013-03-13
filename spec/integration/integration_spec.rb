@@ -55,32 +55,31 @@ describe Vehicle do
                             :first_gear, :second_gear, :third_gear }
 
     it { should handle_event :ignite, when: :parked }
-    it { should_not handle_events :park, :idle, :shift_up,
-                                  :shift_down, :crash, :repair,
-                                  when: :parked }
+    it { should reject_events :park, :idle, :shift_up,
+                              :shift_down, :crash, :repair,
+                              when: :parked }
 
     it { should handle_events :park, :shift_up, :crash, when: :idling }
-    it { should_not handle_events :ignite, :idle, :shift_down, :repair,
-                                  when: :idling }
+    it { should reject_events :ignite, :idle, :shift_down, :repair,
+                              when: :idling }
 
     it { should handle_events :ignite, :repair, when: :stalled }
-    it { should_not handle_events :park, :idle, :shift_up,
-                                  :shift_down, :crash,
-                                  when: :stalled }
+    it { should reject_events :park, :idle, :shift_up, :shift_down, :crash,
+                              when: :stalled }
 
     it { should handle_events :park, :idle, :shift_up, :crash,
                               when: :first_gear }
-    it { should_not handle_events :ignite, :shift_down, :repair,
-                                  when: :first_gear }
+    it { should reject_events :ignite, :shift_down, :repair,
+                              when: :first_gear }
 
     it { should handle_events :shift_up, :shift_down, :crash,
                               when: :second_gear }
-    it { should_not handle_events :park, :ignite, :idle, :repair,
-                                  when: :second_gear }
+    it { should reject_events :park, :ignite, :idle, :repair,
+                              when: :second_gear }
 
     it { should handle_events :shift_down, :crash, when: :third_gear }
-    it { should_not handle_events :park, :ignite, :idle,
-                                  :shift_up, :repair, when: :third_gear }
+    it { should reject_events :park, :ignite, :idle, :shift_up, :repair,
+                              when: :third_gear }
 
     it 'has an initial state of "parked"' do
       vehicle.should be_parked

@@ -18,7 +18,7 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
         end
       end
 
-      context 'and the state exists' do
+      context 'and that state exists' do
         before do
           matcher_class = Class.new do
             state_machine :state, initial: :mathy do
@@ -40,9 +40,7 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
       before do
         matcher_class = Class.new do
           state_machine :state, initial: :mathy do
-            event :mathematize do
-              transition any => same
-            end
+            event(:mathematize) { transition any => same }
           end
         end
         @matcher_subject = matcher_class.new
@@ -64,15 +62,9 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
           state_machine :state, initial: :mathy do
             state :polynomial
 
-            event :mathematize do
-              transition any => same
-            end
-            event :algebraify do
-              transition :polynomial => same
-            end
-            event :trigonomalize do
-              transition :trigonomalize => same
-            end
+            event(:mathematize) { transition any => same }
+            event(:algebraify) { transition :polynomial => same }
+            event(:trigonomalize) { transition :trigonomalize => same }
           end
         end
         @matcher_subject = matcher_class.new

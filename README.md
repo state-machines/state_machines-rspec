@@ -22,8 +22,10 @@ Or install it yourself as:
 
 ```ruby
 describe Vehicle do
-  it { should have_states :alarm_state, :active, :off }
-  it { should have_state :alarm_state, :active, value: 1 }
+  it { should have_states :parked, :idling, :stalled, :first_gear,
+                          :second_gear, :third_gear }
+  it { should have_states :active, :off, on: :alarm_state }
+  it { should have_state :active, on: :alarm_state, value: 1 }
 end
 ```
 

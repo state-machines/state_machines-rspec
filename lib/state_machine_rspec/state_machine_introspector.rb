@@ -20,6 +20,10 @@ class StateMachineIntrospector
     states.reject { |s| state_defined? s }
   end
 
+  def defined_states(states)
+    states.keep_if { |s| state_defined? s }
+  end
+
   def undefined_events(events)
     events.reject { |e| event_defined? e }
   end

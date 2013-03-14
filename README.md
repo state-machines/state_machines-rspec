@@ -18,14 +18,17 @@ Or install it yourself as:
 
 ## Matchers
 
-### `have_state`
+### `have_state` & `reject_state`
 
 ```ruby
 describe Vehicle do
   it { should have_states :parked, :idling, :stalled, :first_gear,
                           :second_gear, :third_gear }
+  it { should reject_state :flying }
+
   it { should have_states :active, :off, on: :alarm_state }
   it { should have_state :active, on: :alarm_state, value: 1 }
+  it { should reject_states :broken, :ringing, on: :alarm_state }
 end
 ```
 

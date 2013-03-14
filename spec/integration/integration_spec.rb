@@ -51,8 +51,8 @@ describe Vehicle do
   end
 
   describe 'state machine' do
-    it { should have_states :state, :parked, :idling, :stalled,
-                            :first_gear, :second_gear, :third_gear }
+    it { should have_states :parked, :idling, :stalled, :first_gear,
+                            :second_gear, :third_gear }
 
     it { should handle_event :ignite, when: :parked }
     it { should reject_events :park, :idle, :shift_up,
@@ -277,8 +277,8 @@ describe Vehicle do
   end
 
   describe 'alarm state machine' do
-    it { should have_state :alarm_state, :active, value: 1 }
-    it { should have_state :alarm_state, :off, value: 0 }
+    it { should have_state :active, on: :alarm_state, value: 1 }
+    it { should have_state :off, on: :alarm_state, value: 0 }
     it { should handle_events :enable_alarm, :disable_alarm,
                               when: :active, state: :alarm_state }
     it { should handle_events :enable_alarm, :disable_alarm,

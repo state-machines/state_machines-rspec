@@ -14,12 +14,10 @@ class StateMachineIntrospector
 
   def state(name)
     state = state_machine.states.find { |s| s.name == name }
-    if state.nil?
-      raise StateMachineIntrospectorError,
-        "#{@subject.class} does not define state: #{name}"
-    else
-      state
-    end
+  end
+
+  def undefined_states(states)
+    states.reject { |s| state_defined? s }
   end
 
   def undefined_events(events)
@@ -38,10 +36,20 @@ class StateMachineIntrospector
 
   def state_machine
     if @state_machine_name
-      @subject.class.state_machines[@state_machine_name]
+      unless machine = @subject.class.state_machines[@state_machine_name]
+        raise StateMachineIntrospectorError,
+          "#{@subject.class} does not have a state machine defined " +
+          "on #{@state_machine_name}"
+      end
     else
-      @subject.class.state_machine
+      machine = @subject.class.state_machine
     end
+
+    machine
+  end
+
+  def state_defined?(state_name)
+    state(state_name)
   end
 
   def event_defined?(event)

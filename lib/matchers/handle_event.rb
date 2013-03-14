@@ -29,8 +29,13 @@ module StateMachineRspec
 
       def enter_when_state
         if state_name = @options.fetch(:when, nil)
+          unless when_state = @introspector.state(state_name)
+            raise StateMachineIntrospectorError,
+              "#{@subject.class} does not define state: #{state_name}"
+          end
+
           @subject.send("#{@introspector.state_machine_attribute}=",
-                        @introspector.state(state_name).value)
+                        when_state.value)
         end
       end
 

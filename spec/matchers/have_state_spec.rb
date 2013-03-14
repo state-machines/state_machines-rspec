@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe StateMachineRspec::Matchers::HaveStateMatcher do
   describe '#matches?' do
-    before { @matcher = described_class.new(:radical_state, [:rad, :not_so_rad]) }
+    before { @matcher = described_class.new([:rad, :not_so_rad, { on: :radical_state }]) }
+
     context 'when values are asserted on multiple states' do
       before do
-        @matcher = described_class.new(:radical_state,
-                                       [:rad, :not_so_rad, { value: 'rad' }])
+        @matcher = described_class.new([:rad, :not_so_rad, { value: 'rad' }])
       end
       it 'raises an ArgumentError' do
         expect { @matcher.matches? nil }.to raise_error ArgumentError,
@@ -21,12 +21,10 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
         end
       end
 
-      it 'sets a failure message indicating the state attribute is not defined' do
-        @matcher.matches? @class.new
-        @matcher.failure_message.should =~ /.+? does not have a state machine defined on radical_state/
-      end
-      it 'returns false' do
-        @matcher.matches?(@class.new).should be_false
+      it 'raises' do
+        expect { @matcher.matches? @class.new }.
+          to raise_error StateMachineIntrospectorError,
+            /.+? does not have a state machine defined on radical_state/
       end
     end
 
@@ -42,7 +40,7 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
 
         it 'sets a failure message indicating a state is missing' do
           @matcher.matches? @class.new
-          @matcher.failure_message.should eq 'Expected radical_state to allow state: rad'
+          @matcher.failure_message.should eq 'Expected radical_state to allow states: rad'
         end
         it 'returns false' do
           @matcher.matches?(@class.new).should be_false
@@ -71,8 +69,7 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
 
         context 'state value matches specified value' do
           before do
-            @matcher = described_class.new(:radical_state,
-                                           [:rad, { value: 'uber-rad' }])
+            @matcher = described_class.new([:rad, { on: :radical_state, value: 'uber-rad' }])
             @class = Class.new do
               state_machine :radical_state do
                 state :rad, value: 'uber-rad'
@@ -91,8 +88,7 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
 
         context 'state value does not match specified value' do
           before do
-            @matcher = described_class.new(:radical_state,
-                                           [:rad, { value: 'uber-rad' }])
+            @matcher = described_class.new([:rad, { on: :radical_state, value: 'uber-rad' }])
             @class = Class.new do
               state_machine :radical_state do
                 state :rad, value: 'kinda rad'

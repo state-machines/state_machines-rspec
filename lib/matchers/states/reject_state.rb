@@ -1,4 +1,4 @@
-require 'active_support/core_ext/array/extract_options'
+require 'matchers/states/matcher'
 
 module StateMachineRspec
   module Matchers
@@ -7,19 +7,8 @@ module StateMachineRspec
     end
     alias_method :reject_state, :reject_states
 
-    class RejectStateMatcher
-      attr_reader :failure_message
-
-      def initialize(states)
-        @options = states.extract_options!
-        @states = states
-      end
-
-      def matches?(subject)
-        @subject = subject
-        @introspector = StateMachineIntrospector.new(@subject,
-                                                     @options.fetch(:on, nil))
-
+    class RejectStateMatcher < StateMachineRspec::Matchers::States::Matcher
+      def matches_states?(states)
         no_defined_states?
       end
 

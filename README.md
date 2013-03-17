@@ -1,5 +1,7 @@
 # state_machine_rspec
 
+[![Build Status](https://travis-ci.org/modocache/state_machine_rspec.png?branch=master)](https://travis-ci.org/modocache/state_machine_rspec)
+
 Custom matchers for [pluginaweek/state_machine](https://github.com/pluginaweek/state_machine).
 
 

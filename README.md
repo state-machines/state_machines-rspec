@@ -36,17 +36,19 @@ end
 
 Add these lines to your application's Gemfile:
 
-    group :test do
-      gem 'state_machine_rspec'
-    end
+```ruby
+group :test do
+  gem 'state_machine_rspec'
+end
+```
 
-And then execute:
+And include the matchers in `spec/spec_helper.rb`:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install state_machine_rspec
+```ruby
+RSpec.configure do |config|
+  config.include StateMachineRspec::Matchers
+end
+```
 
 
 ## Contributing

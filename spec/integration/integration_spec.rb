@@ -283,9 +283,9 @@ describe Vehicle do
     it { should reject_states :broken, :ringing, on: :alarm_state }
 
     it { should handle_events :enable_alarm, :disable_alarm,
-                              when: :active, state: :alarm_state }
+                              when: :active, on: :alarm_state }
     it { should handle_events :enable_alarm, :disable_alarm,
-                              when: :off, state: :alarm_state }
+                              when: :off, on: :alarm_state }
 
     it 'has an initial state of activated' do
       vehicle.alarm_active?.should be_true

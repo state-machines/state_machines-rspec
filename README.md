@@ -26,6 +26,8 @@ end
 ```ruby
 describe Vehicle do
   it { should handle_events :shift_down, :crash, when: :third_gear }
+  it { should handle_events :enable_alarm, :disable_alarm,
+                            when: :active, on: :alarm_state }
   it { should reject_events :park, :ignite, :idle, :shift_up, :repair,
                             when: :third_gear }
 end

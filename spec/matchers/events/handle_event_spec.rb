@@ -39,12 +39,12 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
     context 'when subject can perform events' do
       before do
         matcher_class = Class.new do
-          state_machine :state, initial: :mathy do
+          state_machine :mathiness, initial: :mathy do
             event(:mathematize) { transition any => same }
           end
         end
         @matcher_subject = matcher_class.new
-        @matcher = described_class.new([:mathematize])
+        @matcher = described_class.new([:mathematize, on: :mathiness])
       end
 
       it 'does not set a failure message' do

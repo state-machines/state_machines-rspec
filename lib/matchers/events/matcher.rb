@@ -14,7 +14,7 @@ module StateMachineRspec
         def matches?(subject)
           @subject = subject
           @introspector = StateMachineIntrospector.new(@subject,
-                                                       @options.fetch(:state, nil))
+                                                       @options.fetch(:on, nil))
           enter_when_state
           return false if undefined_events?
           return false unless matches_events?(@events)

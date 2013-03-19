@@ -26,6 +26,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'terminal-notifier-guard'
 
   spec.add_dependency 'rspec', '~> 2.9'
-  spec.add_dependency 'state_machine', '~> 1.1.0'
+  spec.add_dependency 'state_machine', '>= 1.1.0'
   spec.add_dependency 'activesupport'
 end

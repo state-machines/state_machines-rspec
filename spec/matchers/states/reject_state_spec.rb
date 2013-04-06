@@ -78,4 +78,22 @@ describe StateMachineRspec::Matchers::RejectStateMatcher do
       end
     end
   end
+
+  describe '#description' do
+    context 'with no options' do
+      let(:matcher) { described_class.new([:mustard, :tomatoes]) }
+
+      it 'returns a string description' do
+        matcher.description.should == 'not have :mustard, :tomatoes'
+      end
+    end
+
+    context 'when :on state machine is specified' do
+      let(:matcher) { described_class.new([:peanut_butter, on: :toast]) }
+
+      it 'mentions the state machine variable' do
+        matcher.description.should == 'not have :peanut_butter on :toast'
+      end
+    end
+  end
 end

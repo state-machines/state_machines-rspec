@@ -12,6 +12,12 @@ module StateMachineRspec
         no_defined_states?
       end
 
+      def description
+        message = super
+        message << " on #{state_machine_scope.inspect}" if state_machine_scope
+        "not have #{message}"
+      end
+
       private
 
       def no_defined_states?

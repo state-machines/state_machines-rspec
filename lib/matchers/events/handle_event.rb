@@ -12,6 +12,12 @@ module StateMachineRspec
         !invalid_events?
       end
 
+      def description
+        message = super
+        message << " on #{state_machine_scope.inspect}" if state_machine_scope
+        "handle #{message}"
+      end
+
       private
 
       def invalid_events?

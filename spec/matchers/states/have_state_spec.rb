@@ -107,4 +107,30 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
       end
     end
   end
+
+  describe '#description' do
+    context 'with no options' do
+      let(:matcher) { described_class.new([:fancy_shirt, :cracked_toenail]) }
+
+      it 'returns a string description' do
+        matcher.description.should == 'have :fancy_shirt, :cracked_toenail'
+      end
+    end
+
+    context 'when :value is specified' do
+      let(:matcher) { described_class.new([:mustache, value: :really_shady]) }
+
+      it 'mentions the requisite state' do
+        matcher.description.should == 'have :mustache == :really_shady'
+      end
+    end
+
+    context 'when :on state machine is specified' do
+      let(:matcher) { described_class.new([:lunch, on: :tuesday]) }
+
+      it 'mentions the state machine variable' do
+        matcher.description.should == 'have :lunch on :tuesday'
+      end
+    end
+  end
 end

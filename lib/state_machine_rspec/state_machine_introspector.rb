@@ -21,7 +21,7 @@ class StateMachineIntrospector
   end
 
   def defined_states(states)
-    states.keep_if { |s| state_defined? s }
+    states.select { |s| state_defined? s }
   end
 
   def undefined_events(events)
@@ -29,7 +29,7 @@ class StateMachineIntrospector
   end
 
   def valid_events(events)
-    events.keep_if { |e| valid_event? e }
+    events.select { |e| valid_event? e }
   end
 
   def invalid_events(events)

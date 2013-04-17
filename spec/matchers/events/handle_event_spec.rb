@@ -106,4 +106,30 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
       end
     end
   end
+
+  describe '#description' do
+    context 'with no options' do
+      let(:matcher) { described_class.new([:placate, :mollify]) }
+
+      it 'returns a string description' do
+        matcher.description.should == 'handle :placate, :mollify'
+      end
+    end
+
+    context 'when :when state is specified' do
+      let(:matcher) { described_class.new([:destroy_food, when: :hangry]) }
+
+      it 'mentions the requisite state' do
+        matcher.description.should == 'handle :destroy_food when :hangry'
+      end
+    end
+
+    context 'when :on is specified' do
+      let(:matcher) { described_class.new([:ensmarmify, on: :tired_investors]) }
+
+      it 'mentions the state machine variable' do
+        matcher.description.should == 'handle :ensmarmify on :tired_investors'
+      end
+    end
+  end
 end

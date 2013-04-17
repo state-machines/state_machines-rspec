@@ -11,12 +11,16 @@ module StateMachineRspec
           @states = states
         end
 
+        def description
+          @states.map{ |event| event.inspect }.join(', ')
+        end
+
         def matches?(subject)
           raise_if_multiple_values
 
           @subject = subject
           @introspector = StateMachineIntrospector.new(@subject,
-                                                       @options.fetch(:on, nil))
+                                                       state_machine_scope)
 
           return false unless matches_states?(@states)
           @failure_message.nil?
@@ -27,10 +31,20 @@ module StateMachineRspec
             "subclasses of #{self.class} must override matches_states?"
         end
 
+        protected
+
+        def state_machine_scope
+          @options.fetch(:on, nil)
+        end
+
+        def state_value
+          @options.fetch(:value, nil)
+        end
+
         private
 
         def raise_if_multiple_values
-          if @states.count > 1 && @options.fetch(:value, nil)
+          if @states.count > 1 && state_value
             raise ArgumentError, 'cannot make value assertions on ' +
                                  'multiple states at once'
           end

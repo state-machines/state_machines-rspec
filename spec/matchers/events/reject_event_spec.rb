@@ -106,4 +106,30 @@ describe StateMachineRspec::Matchers::RejectEventMatcher do
       end
     end
   end
+
+  describe '#description' do
+    context 'with no options' do
+      let(:matcher) { described_class.new([:makeadealify, :hustlinate]) }
+
+      it 'returns a string description' do
+        matcher.description.should == 'reject :makeadealify, :hustlinate'
+      end
+    end
+
+    context 'when :when state is specified' do
+      let(:matcher) { described_class.new([:begargle, when: :sleep_encrusted]) }
+
+      it 'mentions the requisite state' do
+        matcher.description.should == 'reject :begargle when :sleep_encrusted'
+      end
+    end
+
+    context 'when :on is specified' do
+      let(:matcher) { described_class.new([:harrangue, on: :suspicious_crowd]) }
+
+      it 'mentions the state machine variable' do
+        matcher.description.should == 'reject :harrangue on :suspicious_crowd'
+      end
+    end
+  end
 end

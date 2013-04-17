@@ -14,6 +14,13 @@ module StateMachineRspec
         @failure_message.nil?
       end
 
+      def description
+        message = super
+        message << " == #{state_value.inspect}" if state_value
+        message << " on #{state_machine_scope.inspect}" if state_machine_scope
+        "have #{message}"
+      end
+
       private
 
       def undefined_states?
@@ -27,7 +34,6 @@ module StateMachineRspec
       end
 
       def incorrect_value?
-        state_value = @options.fetch(:value, nil)
         if state_value && @introspector.state(@states.first).value != state_value
           @failure_message = "Expected #{@states.first} to have value #{state_value}"
           true

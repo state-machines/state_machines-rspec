@@ -12,6 +12,12 @@ module StateMachineRspec
         !valid_events?
       end
 
+      def description
+        message = super
+        message << " on #{state_machine_scope.inspect}" if state_machine_scope
+        "reject #{message}"
+      end
+
       private
 
       def valid_events?

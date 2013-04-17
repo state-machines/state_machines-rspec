@@ -26,10 +26,22 @@ module StateMachineRspec
             "subclasses of #{self.class} must override matches_events?"
         end
 
+        def description
+          message = @events.map{ |event| event.inspect }.join(', ')
+          message << " when #{state_name.inspect}" if state_name
+          message
+        end
+
+        protected
+
+        def state_machine_scope
+          @options.fetch(:on, nil)
+        end
+
         private
 
         def enter_when_state
-          if state_name = @options.fetch(:when, nil)
+          if state_name
             unless when_state = @introspector.state(state_name)
               raise StateMachineIntrospectorError,
                 "#{@subject.class} does not define state: #{state_name}"
@@ -38,6 +50,10 @@ module StateMachineRspec
             @subject.send("#{@introspector.state_machine_attribute}=",
                           when_state.value)
           end
+        end
+
+        def state_name
+          @options.fetch(:when, nil)
         end
 
         def undefined_events?

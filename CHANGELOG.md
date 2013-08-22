@@ -1,3 +1,8 @@
+## [0.1.3](https://github.com/modocache/state_machine_rspec/compare/v0.1.2...v0.1.3)
+
+- Add `#description` to matchers.
+- Update rspec dependency.
+
 ## [0.1.2](https://github.com/modocache/state_machine_rspec/compare/v0.1.1...v0.1.2)
 
 - state_machine dependency updated from "~> 1.1.0" to ">= 1.1.0".

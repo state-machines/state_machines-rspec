@@ -40,10 +40,10 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
 
         it 'sets a failure message indicating a state is missing' do
           @matcher.matches? @class.new
-          @matcher.failure_message.should eq 'Expected radical_state to allow states: rad'
+          expect(@matcher.failure_message).to eq 'Expected radical_state to allow states: rad'
         end
         it 'returns false' do
-          @matcher.matches?(@class.new).should be_falsey
+          expect(@matcher.matches?(@class.new)).to be_falsey
         end
       end
 
@@ -60,10 +60,10 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
         context 'state values not specified' do
           it 'does not set a failure message' do
             @matcher.matches? @class.new
-            @matcher.failure_message.should be_nil
+            expect(@matcher.failure_message).to be_nil
           end
           it 'returns true' do
-            @matcher.matches?(@class.new).should be_truthy
+            expect(@matcher.matches?(@class.new)).to be_truthy
           end
         end
 
@@ -79,10 +79,10 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
 
           it 'does not set a failure message' do
             @matcher.matches? @class.new
-            @matcher.failure_message.should be_nil
+            expect(@matcher.failure_message).to  be_nil
           end
           it 'returns true' do
-            @matcher.matches?(@class.new).should be_truthy
+            expect(@matcher.matches?(@class.new)).to be_truthy
           end
         end
 
@@ -98,10 +98,10 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
 
           it 'does not set a failure message' do
             @matcher.matches? @class.new
-            @matcher.failure_message.should eq 'Expected rad to have value uber-rad'
+            expect(@matcher.failure_message).to  eq 'Expected rad to have value uber-rad'
           end
           it 'returns true' do
-            @matcher.matches?(@class.new).should be_falsey
+            expect(@matcher.matches?(@class.new)).to be_falsey
           end
         end
       end
@@ -113,7 +113,7 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
       let(:matcher) { described_class.new([:fancy_shirt, :cracked_toenail]) }
 
       it 'returns a string description' do
-        matcher.description.should == 'have :fancy_shirt, :cracked_toenail'
+        expect(matcher.description).to  eq('have :fancy_shirt, :cracked_toenail')
       end
     end
 
@@ -121,7 +121,7 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
       let(:matcher) { described_class.new([:mustache, value: :really_shady]) }
 
       it 'mentions the requisite state' do
-        matcher.description.should == 'have :mustache == :really_shady'
+        expect(matcher.description).to  eq('have :mustache == :really_shady')
       end
     end
 
@@ -129,7 +129,7 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
       let(:matcher) { described_class.new([:lunch, on: :tuesday]) }
 
       it 'mentions the state machine variable' do
-        matcher.description.should == 'have :lunch on :tuesday'
+        expect(matcher.description).to  eq('have :lunch on :tuesday')
       end
     end
   end

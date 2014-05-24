@@ -31,7 +31,7 @@ describe StateMachineRspec::Matchers::RejectEventMatcher do
 
         it 'sets the state' do
           @matcher.matches? @matcher_subject
-          @matcher_subject.state.should eq 'sneezy'
+          expect(@matcher_subject.state).to eq('sneezy')
         end
       end
     end
@@ -48,16 +48,15 @@ describe StateMachineRspec::Matchers::RejectEventMatcher do
       end
 
       it 'does not raise' do
-        expect { @matcher.matches?(@matcher_subject) }.to_not raise_error
+        expect { @matcher.matches?(@matcher_subject) }.not_to raise_error
       end
       it 'sets a failure message' do
         @matcher.matches? @matcher_subject
-        @matcher.failure_message.
-          should eq 'state_machine: state does not ' +
-                    'define events: martinilunchitize'
+        expect(@matcher.failure_message).to eq('state_machine: state does not ' +
+                                               'define events: martinilunchitize')
       end
       it 'returns false' do
-        @matcher.matches?(@matcher_subject).should be_falsey
+        expect(@matcher.matches?(@matcher_subject)).to be_falsey
       end
     end
 
@@ -75,10 +74,10 @@ describe StateMachineRspec::Matchers::RejectEventMatcher do
 
       it 'does not set a failure message' do
         @matcher.matches? @matcher_subject
-        @matcher.failure_message.should be_nil
+        expect(@matcher.failure_message).to  be_nil
       end
       it 'returns true' do
-        @matcher.matches?(@matcher_subject).should be_truthy
+        expect(@matcher.matches?(@matcher_subject)).to be_truthy
       end
     end
 
@@ -97,12 +96,11 @@ describe StateMachineRspec::Matchers::RejectEventMatcher do
 
       it 'sets a failure message' do
         @matcher.matches? @matcher_subject
-        @matcher.failure_message.
-          should eq 'Did not expect to be able to handle events: defer_to_management ' +
-                    'in state: snarky'
+        expect(@matcher.failure_message).to eq('Did not expect to be able to handle events: defer_to_management ' +
+                                               'in state: snarky')
       end
       it 'returns false' do
-        @matcher.matches?(@matcher_subject).should be_falsey
+        expect(@matcher.matches?(@matcher_subject)).to be_falsey
       end
     end
   end
@@ -112,7 +110,7 @@ describe StateMachineRspec::Matchers::RejectEventMatcher do
       let(:matcher) { described_class.new([:makeadealify, :hustlinate]) }
 
       it 'returns a string description' do
-        matcher.description.should == 'reject :makeadealify, :hustlinate'
+        expect(matcher.description).to  eq('reject :makeadealify, :hustlinate')
       end
     end
 
@@ -120,7 +118,7 @@ describe StateMachineRspec::Matchers::RejectEventMatcher do
       let(:matcher) { described_class.new([:begargle, when: :sleep_encrusted]) }
 
       it 'mentions the requisite state' do
-        matcher.description.should == 'reject :begargle when :sleep_encrusted'
+        expect(matcher.description).to  eq('reject :begargle when :sleep_encrusted')
       end
     end
 
@@ -128,7 +126,7 @@ describe StateMachineRspec::Matchers::RejectEventMatcher do
       let(:matcher) { described_class.new([:harrangue, on: :suspicious_crowd]) }
 
       it 'mentions the state machine variable' do
-        matcher.description.should == 'reject :harrangue on :suspicious_crowd'
+        expect(matcher.description).to  eq('reject :harrangue on :suspicious_crowd')
       end
     end
   end

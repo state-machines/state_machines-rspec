@@ -31,7 +31,7 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
 
         it 'sets the state' do
           @matcher.matches? @matcher_subject
-          @matcher_subject.state.should eq 'artsy'
+          expect(@matcher_subject.state).to  eq 'artsy'
         end
       end
     end
@@ -49,10 +49,10 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
 
       it 'does not set a failure message' do
         @matcher.matches? @matcher_subject
-        @matcher.failure_message.should be_nil
+        expect(@matcher.failure_message).to  be_nil
       end
       it 'returns true' do
-        @matcher.matches?(@matcher_subject).should be_truthy
+        expect(@matcher.matches?(@matcher_subject)).to be_truthy
       end
     end
 
@@ -77,12 +77,11 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
 
         it 'sets a failure message' do
           @matcher.matches? @matcher_subject
-          @matcher.failure_message.
-            should eq 'Expected to be able to handle events: algebraify, trigonomalize ' +
-                      'in state: mathy'
+          expect(@matcher.failure_message).to eq('Expected to be able to handle events: algebraify, trigonomalize ' +
+                                                 'in state: mathy')
         end
         it 'returns false' do
-          @matcher.matches?(@matcher_subject).should be_falsey
+          expect(@matcher.matches?(@matcher_subject)).to be_falsey
         end
       end
 
@@ -92,16 +91,15 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
         end
 
         it 'does not raise' do
-          expect { @matcher.matches?(@matcher_subject) }.to_not raise_error
+          expect { @matcher.matches?(@matcher_subject) }.not_to raise_error
         end
         it 'sets a failure message' do
           @matcher.matches? @matcher_subject
-          @matcher.failure_message.
-            should eq 'state_machine: state does not ' +
-                      'define events: polynomialize, eulerasterize'
+          expect(@matcher.failure_message).to eq('state_machine: state does not ' +
+                                                 'define events: polynomialize, eulerasterize')
         end
         it 'returns false' do
-          @matcher.matches?(@matcher_subject).should be_falsey
+          expect(@matcher.matches?(@matcher_subject)).to be_falsey
         end
       end
     end
@@ -112,7 +110,7 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
       let(:matcher) { described_class.new([:placate, :mollify]) }
 
       it 'returns a string description' do
-        matcher.description.should == 'handle :placate, :mollify'
+        expect(matcher.description).to  eq('handle :placate, :mollify')
       end
     end
 
@@ -120,7 +118,7 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
       let(:matcher) { described_class.new([:destroy_food, when: :hangry]) }
 
       it 'mentions the requisite state' do
-        matcher.description.should == 'handle :destroy_food when :hangry'
+        expect(matcher.description).to eq('handle :destroy_food when :hangry')
       end
     end
 
@@ -128,7 +126,7 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
       let(:matcher) { described_class.new([:ensmarmify, on: :tired_investors]) }
 
       it 'mentions the state machine variable' do
-        matcher.description.should == 'handle :ensmarmify on :tired_investors'
+        expect(matcher.description).to eq('handle :ensmarmify on :tired_investors')
       end
     end
   end

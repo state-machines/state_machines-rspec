@@ -52,7 +52,7 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
         @matcher.failure_message.should be_nil
       end
       it 'returns true' do
-        @matcher.matches?(@matcher_subject).should be_true
+        @matcher.matches?(@matcher_subject).should be_truthy
       end
     end
 
@@ -82,7 +82,7 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
                       'in state: mathy'
         end
         it 'returns false' do
-          @matcher.matches?(@matcher_subject).should be_false
+          @matcher.matches?(@matcher_subject).should be_falsey
         end
       end
 
@@ -101,7 +101,7 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
                       'define events: polynomialize, eulerasterize'
         end
         it 'returns false' do
-          @matcher.matches?(@matcher_subject).should be_false
+          @matcher.matches?(@matcher_subject).should be_falsey
         end
       end
     end

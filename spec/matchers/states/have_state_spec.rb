@@ -43,7 +43,7 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
           @matcher.failure_message.should eq 'Expected radical_state to allow states: rad'
         end
         it 'returns false' do
-          @matcher.matches?(@class.new).should be_false
+          @matcher.matches?(@class.new).should be_falsey
         end
       end
 
@@ -63,7 +63,7 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
             @matcher.failure_message.should be_nil
           end
           it 'returns true' do
-            @matcher.matches?(@class.new).should be_true
+            @matcher.matches?(@class.new).should be_truthy
           end
         end
 
@@ -82,7 +82,7 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
             @matcher.failure_message.should be_nil
           end
           it 'returns true' do
-            @matcher.matches?(@class.new).should be_true
+            @matcher.matches?(@class.new).should be_truthy
           end
         end
 
@@ -101,7 +101,7 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
             @matcher.failure_message.should eq 'Expected rad to have value uber-rad'
           end
           it 'returns true' do
-            @matcher.matches?(@class.new).should be_false
+            @matcher.matches?(@class.new).should be_falsey
           end
         end
       end

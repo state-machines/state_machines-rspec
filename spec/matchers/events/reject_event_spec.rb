@@ -57,7 +57,7 @@ describe StateMachineRspec::Matchers::RejectEventMatcher do
                     'define events: martinilunchitize'
       end
       it 'returns false' do
-        @matcher.matches?(@matcher_subject).should be_false
+        @matcher.matches?(@matcher_subject).should be_falsey
       end
     end
 
@@ -78,7 +78,7 @@ describe StateMachineRspec::Matchers::RejectEventMatcher do
         @matcher.failure_message.should be_nil
       end
       it 'returns true' do
-        @matcher.matches?(@matcher_subject).should be_true
+        @matcher.matches?(@matcher_subject).should be_truthy
       end
     end
 
@@ -102,7 +102,7 @@ describe StateMachineRspec::Matchers::RejectEventMatcher do
                     'in state: snarky'
       end
       it 'returns false' do
-        @matcher.matches?(@matcher_subject).should be_false
+        @matcher.matches?(@matcher_subject).should be_falsey
       end
     end
   end

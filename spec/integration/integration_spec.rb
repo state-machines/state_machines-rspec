@@ -5,7 +5,7 @@ describe Vehicle do
   let(:vehicle) { Vehicle.new }
   subject { vehicle }
 
-  its(:passed_inspection?) { should be_false }
+  its(:passed_inspection?) { should be_falsey }
 
   shared_examples 'crashable' do
     describe 'crash' do
@@ -36,9 +36,9 @@ describe Vehicle do
   end
 
   describe '#initialize' do
-    its(:seatbelt_on) { should be_false }
+    its(:seatbelt_on) { should be_falsey }
     its(:time_used) { should eq 0 }
-    its(:auto_shop_busy) { should be_true }
+    its(:auto_shop_busy) { should be_truthy }
   end
 
   describe '#put_on_seatbelt' do
@@ -46,7 +46,7 @@ describe Vehicle do
       vehicle.seatbelt_on = false
       vehicle.put_on_seatbelt
 
-      vehicle.seatbelt_on.should be_true
+      vehicle.seatbelt_on.should be_truthy
     end
   end
 
@@ -87,7 +87,7 @@ describe Vehicle do
     end
 
     it 'has an initial alarm state of "active"' do
-      vehicle.alarm_active?.should be_true
+      vehicle.alarm_active?.should be_truthy
     end
 
     describe 'around transitions' do
@@ -288,21 +288,21 @@ describe Vehicle do
                               when: :off, on: :alarm_state }
 
     it 'has an initial state of activated' do
-      vehicle.alarm_active?.should be_true
+      vehicle.alarm_active?.should be_truthy
     end
 
     context 'when active' do
       describe 'enable' do
         it 'becomes active' do
           vehicle.enable_alarm!
-          vehicle.alarm_active?.should be_true
+          vehicle.alarm_active?.should be_truthy
         end
       end
 
       describe 'disable' do
         it 'turns the alarm off' do
           vehicle.disable_alarm!
-          vehicle.alarm_off?.should be_true
+          vehicle.alarm_off?.should be_truthy
         end
       end
     end
@@ -312,14 +312,14 @@ describe Vehicle do
       describe 'enable' do
         it 'becomes active' do
           vehicle.enable_alarm!
-          vehicle.alarm_active?.should be_true
+          vehicle.alarm_active?.should be_truthy
         end
       end
 
       describe 'disable' do
         it 'turns the alarm off' do
           vehicle.disable_alarm!
-          vehicle.alarm_off?.should be_true
+          vehicle.alarm_off?.should be_truthy
         end
       end
     end

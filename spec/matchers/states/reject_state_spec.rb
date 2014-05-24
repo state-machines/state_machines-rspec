@@ -21,11 +21,10 @@ describe StateMachineRspec::Matchers::RejectStateMatcher do
 
           it 'sets a failure message' do
             @matcher.matches? @class.new
-            @matcher.failure_message.
-              should eq 'Did not expect environment to allow states: supportive'
+            expect(@matcher.failure_message).to eq('Did not expect environment to allow states: supportive')
           end
           it 'returns false' do
-            @matcher.matches?(@class.new).should be_false
+            expect(@matcher.matches?(@class.new)).to be_falsey
           end
         end
 
@@ -38,10 +37,10 @@ describe StateMachineRspec::Matchers::RejectStateMatcher do
 
           it 'does not set a failure message' do
             @matcher.matches? @class.new
-            @matcher.failure_message.should be_nil
+            expect(@matcher.failure_message).to  be_nil
           end
           it 'returns true' do
-            @matcher.matches?(@class.new).should be_true
+            expect(@matcher.matches?(@class.new)).to be_truthy
           end
         end
       end
@@ -58,11 +57,10 @@ describe StateMachineRspec::Matchers::RejectStateMatcher do
 
           it 'sets a failure message' do
             @matcher.matches? @class.new
-            @matcher.failure_message.
-              should eq 'Did not expect state to allow states: ever_changing'
+            expect(@matcher.failure_message).to eq('Did not expect state to allow states: ever_changing')
           end
           it 'returns false' do
-            @matcher.matches?(@class.new).should be_false
+            expect(@matcher.matches?(@class.new)).to be_falsey
           end
       end
 
@@ -70,10 +68,10 @@ describe StateMachineRspec::Matchers::RejectStateMatcher do
         before { @class = Class.new }
         it 'does not set a failure message' do
           @matcher.matches? @class.new
-          @matcher.failure_message.should be_nil
+          expect(@matcher.failure_message).to  be_nil
         end
         it 'returns true' do
-          @matcher.matches?(@class.new).should be_true
+          expect(@matcher.matches?(@class.new)).to be_truthy
         end
       end
     end
@@ -84,7 +82,7 @@ describe StateMachineRspec::Matchers::RejectStateMatcher do
       let(:matcher) { described_class.new([:mustard, :tomatoes]) }
 
       it 'returns a string description' do
-        matcher.description.should == 'not have :mustard, :tomatoes'
+        expect(matcher.description).to eq('not have :mustard, :tomatoes')
       end
     end
 
@@ -92,7 +90,7 @@ describe StateMachineRspec::Matchers::RejectStateMatcher do
       let(:matcher) { described_class.new([:peanut_butter, on: :toast]) }
 
       it 'mentions the state machine variable' do
-        matcher.description.should == 'not have :peanut_butter on :toast'
+        expect(matcher.description).to eq('not have :peanut_butter on :toast')
       end
     end
   end

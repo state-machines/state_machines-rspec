@@ -1,6 +1,7 @@
 require 'state_machine'
 require 'state_machine_rspec'
 require 'timecop'
+require 'rspec/its'
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

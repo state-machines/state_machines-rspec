@@ -1,8 +1,8 @@
-# state_machine_rspec
+# state_machines_rspec
 
-[![Build Status](https://travis-ci.org/modocache/state_machine_rspec.png?branch=master)](https://travis-ci.org/modocache/state_machine_rspec)
 
-Custom matchers for [pluginaweek/state_machine](https://github.com/pluginaweek/state_machine).
+Custom matchers for [state-machines/state_machine](https://github.com/state-machines/state_machine).
+Forked from [pluginaweek/state_machine](https://github.com/pluginaweek/state_machine).
 
 
 ## Matchers
@@ -37,18 +37,18 @@ end
 ## Installation
 
 Add these lines to your application's Gemfile:
-
+(Note that the orginal state_machine_rspec used state_machine singular and I'm using state_machines plural to fit in with state-machines/state_machines)
 ```ruby
 group :test do
-  gem 'state_machine_rspec'
+  gem 'state_machines_rspec'
 end
 ```
 
-And include the matchers in `spec/spec_helper.rb`:
+And include the matchers in `spec/spec_helper.rb` or `spec/rails_helper.rb`
 
 ```ruby
 RSpec.configure do |config|
-  config.include StateMachineRspec::Matchers
+  config.include StateMachinesRspec::Matchers
 end
 ```
 

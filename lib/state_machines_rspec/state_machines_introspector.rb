@@ -40,7 +40,7 @@ class StateMachinesIntrospector
 
   def state_machine
     if @state_machine_name
-      unless machine = @subject.class.state_machine[@state_machine_name]
+      unless machine = @subject.class.state_machines[@state_machine_name]
         raise StateMachinesIntrospectorError,
           "#{@subject.class} does not have a state machine defined " +
           "on #{@state_machine_name}"

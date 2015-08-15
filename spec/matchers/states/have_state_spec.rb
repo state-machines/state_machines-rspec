@@ -24,7 +24,7 @@ describe StateMachinesRspec::Matchers::HaveStateMatcher do
       it 'raises' do
         expect { @matcher.matches? @class.new }.
           to raise_error StateMachinesIntrospectorError,
-            /.+? does not have a state machines defined on radical_state/
+            /.+? does not have a state machine defined on radical_state/
       end
     end
 

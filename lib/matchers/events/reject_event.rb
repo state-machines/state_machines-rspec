@@ -1,13 +1,13 @@
 require 'matchers/events/matcher'
 
-module StateMachineRspec
+module StateMachinesRspec
   module Matchers
     def reject_events(value, *values)
       RejectEventMatcher.new(values.unshift(value))
     end
     alias_method :reject_event, :reject_events
 
-    class RejectEventMatcher < StateMachineRspec::Matchers::Events::Matcher
+    class RejectEventMatcher < StateMachinesRspec::Matchers::Events::Matcher
       def matches_events?(events)
         !valid_events?
       end

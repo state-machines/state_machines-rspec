@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StateMachineRspec::Matchers::HandleEventMatcher do
+describe StateMachinesRspec::Matchers::HandleEventMatcher do
   describe '#matches?' do
     context 'when :when state is specified' do
       context 'but the state doesn\'t exist' do
@@ -14,7 +14,7 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
 
         it 'raises' do
           expect { @matcher.matches? @matcher_subject }.
-            to raise_error StateMachineIntrospectorError
+            to raise_error StateMachinesIntrospectorError
         end
       end
 
@@ -125,7 +125,7 @@ describe StateMachineRspec::Matchers::HandleEventMatcher do
     context 'when :on is specified' do
       let(:matcher) { described_class.new([:ensmarmify, on: :tired_investors]) }
 
-      it 'mentions the state machine variable' do
+      it 'mentions the state machines variable' do
         expect(matcher.description).to eq('handle :ensmarmify on :tired_investors')
       end
     end

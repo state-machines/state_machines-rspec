@@ -1,6 +1,6 @@
 require 'active_support/core_ext/array/extract_options'
 
-module StateMachineRspec
+module StateMachinesRspec
   module Matchers
     module Events
       class Matcher
@@ -13,7 +13,7 @@ module StateMachineRspec
 
         def matches?(subject)
           @subject = subject
-          @introspector = StateMachineIntrospector.new(@subject,
+          @introspector = StateMachinesIntrospector.new(@subject,
                                                        @options.fetch(:on, nil))
           enter_when_state
           return false if undefined_events?
@@ -43,7 +43,7 @@ module StateMachineRspec
         def enter_when_state
           if state_name
             unless when_state = @introspector.state(state_name)
-              raise StateMachineIntrospectorError,
+              raise StateMachinesIntrospectorError,
                 "#{@subject.class} does not define state: #{state_name}"
             end
 

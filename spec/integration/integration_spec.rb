@@ -31,7 +31,7 @@ describe Vehicle do
 
   shared_examples 'speedless' do
     it 'does not respond to speed' do
-      expect { vehicle.speed }.to raise_error NoMethodError
+      expect { vehicle.speed }.to raise_error StateMachines::InvalidContext
     end
   end
 
@@ -50,7 +50,7 @@ describe Vehicle do
     end
   end
 
-  describe 'state machine' do
+  describe 'state machines' do
     it { is_expected.to have_states :parked, :idling, :stalled, :first_gear,
                             :second_gear, :third_gear }
     it { is_expected.to reject_state :flying }
@@ -277,7 +277,7 @@ describe Vehicle do
     end
   end
 
-  describe 'alarm state machine' do
+  describe 'alarm state machines' do
     it { is_expected.to have_state :active, on: :alarm_state, value: 1 }
     it { is_expected.to have_state :off, on: :alarm_state, value: 0 }
     it { is_expected.to reject_states :broken, :ringing, on: :alarm_state }

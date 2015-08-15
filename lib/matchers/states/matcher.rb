@@ -1,6 +1,6 @@
 require 'active_support/core_ext/array/extract_options'
 
-module StateMachineRspec
+module StateMachinesRspec
   module Matchers
     module States
       class Matcher
@@ -19,7 +19,7 @@ module StateMachineRspec
           raise_if_multiple_values
 
           @subject = subject
-          @introspector = StateMachineIntrospector.new(@subject,
+          @introspector = StateMachinesIntrospector.new(@subject,
                                                        state_machine_scope)
 
           return false unless matches_states?(@states)

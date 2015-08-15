@@ -1,13 +1,13 @@
 require 'matchers/states/matcher'
 
-module StateMachineRspec
+module StateMachinesRspec
   module Matchers
     def reject_states(state, *states)
       RejectStateMatcher.new(states.unshift(state))
     end
     alias_method :reject_state, :reject_states
 
-    class RejectStateMatcher < StateMachineRspec::Matchers::States::Matcher
+    class RejectStateMatcher < StateMachinesRspec::Matchers::States::Matcher
       def matches_states?(states)
         no_defined_states?
       end

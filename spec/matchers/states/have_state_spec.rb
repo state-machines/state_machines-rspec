@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StateMachineRspec::Matchers::HaveStateMatcher do
+describe StateMachinesRspec::Matchers::HaveStateMatcher do
   describe '#matches?' do
     before { @matcher = described_class.new([:rad, :not_so_rad, { on: :radical_state }]) }
 
@@ -23,8 +23,8 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
 
       it 'raises' do
         expect { @matcher.matches? @class.new }.
-          to raise_error StateMachineIntrospectorError,
-            /.+? does not have a state machine defined on radical_state/
+          to raise_error StateMachinesIntrospectorError,
+            /.+? does not have a state machines defined on radical_state/
       end
     end
 
@@ -125,10 +125,10 @@ describe StateMachineRspec::Matchers::HaveStateMatcher do
       end
     end
 
-    context 'when :on state machine is specified' do
+    context 'when :on state machines is specified' do
       let(:matcher) { described_class.new([:lunch, on: :tuesday]) }
 
-      it 'mentions the state machine variable' do
+      it 'mentions the state machines variable' do
         expect(matcher.description).to  eq('have :lunch on :tuesday')
       end
     end

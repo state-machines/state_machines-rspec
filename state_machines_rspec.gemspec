@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'state_machine_rspec/version'
+require 'state_machines_rspec/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'state_machine_rspec'
-  spec.version       = StateMachineRspec::VERSION
-  spec.authors       = ['modocache']
-  spec.email         = ['modocache@gmail.com']
-  spec.description   = %q{ RSpec matchers for state_machine. }
-  spec.summary       = %q{ RSpec matchers for state_machine. }
-  spec.homepage      = 'http://github.com/modocache/state_machine_rspec'
+  spec.name          = 'state_machines_rspec'
+  spec.version       = StateMachinesRspec::VERSION
+  spec.authors       = ['JohnSmall']
+  spec.email         = ['jds340@gmail.com']
+  spec.description   = %q{ RSpec matchers for state_machines. Forked from forked from modocache/state_machine_rspec to work with state-machines/state_machines (https://github.com/state-machines/state_machines)}
+  spec.summary       = %q{ RSpec matchers for state-machines/state_machines. }
+  spec.homepage      = 'http://github.com/johnsmall/state_machines_rspec'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'terminal-notifier-guard'
   spec.add_development_dependency 'rspec-its'
 
-  spec.add_dependency 'rspec', '>= 3.0.0.rc1'
-  spec.add_dependency 'state_machine', '>= 1.1.0'
+  spec.add_dependency 'rspec', '~>3.3'
+  spec.add_dependency 'state_machines'
   spec.add_dependency 'activesupport'
 end

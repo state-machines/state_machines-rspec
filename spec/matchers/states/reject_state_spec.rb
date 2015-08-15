@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-describe StateMachineRspec::Matchers::RejectStateMatcher do
+describe StateMachinesRspec::Matchers::RejectStateMatcher do
   describe '#matches?' do
-    context 'when :on state machine attribute is specified' do
+    context 'when :on state machines attribute is specified' do
       before { @matcher = described_class.new([:supportive, on: :environment]) }
-      context 'but that state machine doesn\'t exist' do
+      context 'but that state machines doesn\'t exist' do
         before { @class = Class.new }
         it 'raises' do
           expect { @matcher.matches? @class.new }.to raise_error
         end
       end
 
-      context 'and that state machine exists' do
+      context 'and that state machines exists' do
         context 'but it defines states which match one of the specified states' do
           before do
             @class = Class.new do
@@ -46,9 +46,9 @@ describe StateMachineRspec::Matchers::RejectStateMatcher do
       end
     end
 
-    context 'when :on state machine is not specified' do
+    context 'when :on state machines is not specified' do
       before { @matcher = described_class.new([:ever_changing]) }
-      context 'but the default state machine defines states which match one of the specified states' do
+      context 'but the default state machines defines states which match one of the specified states' do
         before do
           @class = Class.new do
             state_machine initial: :ever_changing
@@ -64,7 +64,7 @@ describe StateMachineRspec::Matchers::RejectStateMatcher do
           end
       end
 
-      context 'and the default state machine does not define any of the states specified' do
+      context 'and the default state machines does not define any of the states specified' do
         before { @class = Class.new }
         it 'does not set a failure message' do
           @matcher.matches? @class.new
@@ -86,10 +86,10 @@ describe StateMachineRspec::Matchers::RejectStateMatcher do
       end
     end
 
-    context 'when :on state machine is specified' do
+    context 'when :on state machines is specified' do
       let(:matcher) { described_class.new([:peanut_butter, on: :toast]) }
 
-      it 'mentions the state machine variable' do
+      it 'mentions the state machines variable' do
         expect(matcher.description).to eq('not have :peanut_butter on :toast')
       end
     end

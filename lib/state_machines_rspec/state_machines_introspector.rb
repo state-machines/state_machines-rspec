@@ -1,4 +1,4 @@
-class StateMachineIntrospector
+class StateMachinesIntrospector
   def initialize(subject, state_machine_name=nil)
     @subject = subject
     @state_machine_name = state_machine_name
@@ -40,8 +40,8 @@ class StateMachineIntrospector
 
   def state_machine
     if @state_machine_name
-      unless machine = @subject.class.state_machines[@state_machine_name]
-        raise StateMachineIntrospectorError,
+      unless machine = @subject.class.state_machine[@state_machine_name]
+        raise StateMachinesIntrospectorError,
           "#{@subject.class} does not have a state machine defined " +
           "on #{@state_machine_name}"
       end
@@ -66,5 +66,5 @@ class StateMachineIntrospector
 
 end
 
-class StateMachineIntrospectorError < StandardError
+class StateMachinesIntrospectorError < StandardError
 end

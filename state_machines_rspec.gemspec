@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['jds340@gmail.com']
   spec.description   = %q{ RSpec matchers for state_machines. Forked from modocache/state_machine_rspec to work with state-machines/state_machines (https://github.com/state-machines/state_machines)}
   spec.summary       = %q{ RSpec matchers for state-machines/state_machines. }
-  spec.homepage      = 'http://github.com/johnsmall/state_machines_rspec'
+  spec.homepage      = 'http://github.com/state-machines/state_machines_rspec'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)

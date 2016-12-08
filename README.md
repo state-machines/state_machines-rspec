@@ -1,9 +1,9 @@
 # state_machines_rspec
 
 
-Custom matchers for [state-machines/state_machine](https://github.com/state-machines/state_machine).
-Forked from [pluginaweek/state_machine](https://github.com/pluginaweek/state_machine).
+Custom RSpec matchers for [state-machines/state_machine](https://github.com/state-machines/state_machine).
 
+This repo is forked from [modocache/state_machine_rspec](https://github.com/modocache/state_machine_rspec).
 
 ## Matchers
 
@@ -37,12 +37,14 @@ end
 ## Installation
 
 Add these lines to your application's Gemfile:
-(Note that the orginal state_machine_rspec used state_machine singular and I'm using state_machines plural to fit in with state-machines/state_machines)
+
 ```ruby
 group :test do
   gem 'state_machines_rspec'
 end
 ```
+
+(Note that the orginal `state_machine_rspec` used `state_machine` singular and I'm using `state_machines` plural to fit in with `state-machines/state_machines`.)
 
 And include the matchers in `spec/spec_helper.rb` or `spec/rails_helper.rb`
 
@@ -51,7 +53,6 @@ RSpec.configure do |config|
   config.include StateMachinesRspec::Matchers
 end
 ```
-
 
 ## Contributing
 

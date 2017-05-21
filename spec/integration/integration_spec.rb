@@ -82,6 +82,9 @@ describe Vehicle do
     it { is_expected.to reject_events :park, :ignite, :idle, :shift_up, :repair,
                               when: :third_gear }
 
+    it { is_expected.to transition_from :idling, :first_gear, to_state: :parked, on_event: :park }
+    it { is_expected.to transition_from :idling, to_state: :parked, on_event: :park }
+
     it 'has an initial state of "parked"' do
       expect(vehicle).to  be_parked
     end
@@ -286,6 +289,8 @@ describe Vehicle do
                               when: :active, on: :alarm_state }
     it { is_expected.to handle_events :enable_alarm, :disable_alarm,
                               when: :off, on: :alarm_state }
+
+    it { is_expected.to transition_from :active, to_state: :off, on_event: :disable_alarm, on: :alarm_state }
 
     it 'has an initial state of activated' do
       expect(vehicle.alarm_active?).to be_truthy

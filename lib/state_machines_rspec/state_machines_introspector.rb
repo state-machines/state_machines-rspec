@@ -13,7 +13,7 @@ class StateMachinesIntrospector
   end
 
   def state(name)
-    state = state_machine.states.find { |s| s.name == name }
+    state_machine.states.find { |s| s.name == name }
   end
 
   def undefined_states(states)
@@ -36,13 +36,22 @@ class StateMachinesIntrospector
     events.reject { |e| valid_event? e }
   end
 
+  def event_defined?(event)
+    @subject.respond_to? "can_#{event}?"
+  end
+
+  def valid_transition?(event, to_state)
+    @subject.send(event)
+    current_state_value == to_state
+  end
+
   private
 
   def state_machine
     if @state_machine_name
       unless machine = @subject.class.state_machines[@state_machine_name]
         raise StateMachinesIntrospectorError,
-          "#{@subject.class} does not have a state machine defined " +
+          "#{@subject.class} does not have a state machine defined " \
           "on #{@state_machine_name}"
       end
     else
@@ -56,14 +65,9 @@ class StateMachinesIntrospector
     state(state_name)
   end
 
-  def event_defined?(event)
-    @subject.respond_to? "can_#{event}?"
-  end
-
   def valid_event?(event)
     @subject.send("can_#{event}?")
   end
-
 end
 
 class StateMachinesIntrospectorError < StandardError

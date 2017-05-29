@@ -4,6 +4,7 @@ require 'matchers/events/handle_event'
 require 'matchers/events/reject_event'
 require 'matchers/states/have_state'
 require 'matchers/states/reject_state'
+require 'matchers/transitions/transition_from'
 
 module StateMachinesRspec
   module Matchers

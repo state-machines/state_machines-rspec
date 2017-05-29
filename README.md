@@ -11,13 +11,13 @@ This repo is forked from [modocache/state_machine_rspec](https://github.com/modo
 
 ```ruby
 describe Vehicle do
-  it { should have_states :parked, :idling, :stalled, :first_gear,
-                          :second_gear, :third_gear }
-  it { should reject_state :flying }
+  it { is_expected.to have_states :parked, :idling, :stalled, :first_gear,
+                                  :second_gear, :third_gear }
+  it { is_expected.to reject_state :flying }
 
-  it { should have_states :active, :off, on: :alarm_state }
-  it { should have_state :active, on: :alarm_state, value: 1 }
-  it { should reject_states :broken, :ringing, on: :alarm_state }
+  it { is_expected.to have_states :active, :off, on: :alarm_state }
+  it { is_expected.to have_state :active, on: :alarm_state, value: 1 }
+  it { is_expected.to reject_states :broken, :ringing, on: :alarm_state }
 end
 ```
 
@@ -25,11 +25,24 @@ end
 
 ```ruby
 describe Vehicle do
-  it { should handle_events :shift_down, :crash, when: :third_gear }
-  it { should handle_events :enable_alarm, :disable_alarm,
-                            when: :active, on: :alarm_state }
-  it { should reject_events :park, :ignite, :idle, :shift_up, :repair,
-                            when: :third_gear }
+  it { is_expected.to handle_events :shift_down, :crash, when: :third_gear }
+  it { is_expected.to handle_events :enable_alarm, :disable_alarm,
+                                    when: :active, on: :alarm_state }
+  it { is_expected.to reject_events :park, :ignite, :idle, :shift_up, :repair,
+                                    when: :third_gear }
+end
+```
+
+### `transition_from`
+
+```ruby
+describe Vehicle do
+  it { is_expected.to transition_from :idling, to_state: :parked,
+                                      on_event: :park }
+  it { is_expected.to transition_from :idling, :first_gear,
+                                      to_state: :parked, on_event: :park }
+  it { is_expected.to transition_from :active, to_state: :off,
+                                      on_event: :disable_alarm, on: :alarm_state }
 end
 ```
 

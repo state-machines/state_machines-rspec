@@ -1,5 +1,5 @@
 # state_machines_rspec
-
+[![Gem Version](https://badge.fury.io/rb/state_machines_rspec.svg)](https://badge.fury.io/rb/state_machines_rspec)
 
 Custom RSpec matchers for [state-machines/state_machine](https://github.com/state-machines/state_machine).
 

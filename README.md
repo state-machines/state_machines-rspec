@@ -1,4 +1,4 @@
-# state_machines_rspec
+# state_machines-rspec
 [![Gem Version](https://badge.fury.io/rb/state_machines-rspec.svg)](https://badge.fury.io/rb/state_machines-rspec)
 
 Custom RSpec matchers for [state-machines/state_machine](https://github.com/state-machines/state_machine).
@@ -53,7 +53,7 @@ Add these lines to your application's Gemfile:
 
 ```ruby
 group :test do
-  gem 'state_machines_rspec'
+  gem 'state_machines-rspec'
 end
 ```
 

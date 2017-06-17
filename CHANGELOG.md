@@ -1,3 +1,9 @@
+## [0.4.0](https://github.com/state-machines/state_machines-rspec/compare/v0.3.2...v0.4.0)
+- Renamed the gem to state_machines-rspec
+- Gem ownership is now shared between multiple maintainers 
+- Removed deprecated syntax in examples
+- Add transition from matcher
+
 ## [0.1.3](https://github.com/modocache/state_machine_rspec/compare/v0.1.2...v0.1.3)
 
 - Add `#description` to matchers.

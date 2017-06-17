@@ -16,4 +16,7 @@ test/tmp
 test/version_tmp
 tmp
 *.swp
+# JETBRAINS IDEs files
+.idea
+*.iml
 

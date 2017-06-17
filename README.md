@@ -1,5 +1,6 @@
 # state_machines-rspec
 [![Gem Version](https://badge.fury.io/rb/state_machines-rspec.svg)](https://badge.fury.io/rb/state_machines-rspec)
+[![Build Status](https://travis-ci.org/state-machines/state_machines-rspec.svg?branch=master)](https://travis-ci.org/state-machines/state_machines-rspec)
 
 Custom RSpec matchers for [state-machines/state_machine](https://github.com/state-machines/state_machine).
 

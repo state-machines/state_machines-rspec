@@ -1,5 +1,5 @@
 require 'state_machines'
-require 'state_machines_rspec'
+require 'state_machines-rspec'
 require 'timecop'
 require 'rspec/its'
 

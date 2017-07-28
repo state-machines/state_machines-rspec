@@ -12,6 +12,10 @@ class StateMachinesIntrospector
     @subject.send(state_machine_attribute)
   end
 
+  def all_states
+    state_machine.states.to_a.map(&:name)
+  end
+
   def state(name)
     state_machine.states.find { |s| s.name == name }
   end

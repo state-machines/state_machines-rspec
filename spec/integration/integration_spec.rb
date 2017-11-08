@@ -84,6 +84,7 @@ describe Vehicle do
 
     it { is_expected.to transition_from :idling, :first_gear, to_state: :parked, on_event: :park }
     it { is_expected.to transition_from :idling, to_state: :parked, on_event: :park }
+    it { is_expected.to transition_from :_any_, to_state: :stoped, on_event: :stop }
 
     it 'has an initial state of "parked"' do
       expect(vehicle).to  be_parked

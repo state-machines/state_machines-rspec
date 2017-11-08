@@ -21,6 +21,7 @@ module StateMachinesRspec
       def matches?(subject)
         @subject = subject
         @introspector = StateMachinesIntrospector.new(@subject, state_machine_scope)
+        @from_states = @introspector.all_states if from_states == [:_any_]
         from_states.each do |from_state|
           @from_state = from_state
           enter_from_state
@@ -32,7 +33,7 @@ module StateMachinesRspec
 
       def description
         message = "transition state to :#{options[:to_state]} from "
-        message << from_states.map{ |state| ":#{state}" }.join(', ')
+        message << from_states.map { |state| ":#{state}" }.join(', ')
         message << " on event :#{options[:on_event]}"
         message << " on #{state_machine_scope.inspect}" if state_machine_scope
         message

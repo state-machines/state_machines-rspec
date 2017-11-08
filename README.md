@@ -44,6 +44,7 @@ describe Vehicle do
                                       to_state: :parked, on_event: :park }
   it { is_expected.to transition_from :active, to_state: :off,
                                       on_event: :disable_alarm, on: :alarm_state }
+  it { is_expected.to transition_from :_any_, to_state: :stoped, on_event: :stop }
 end
 ```
 

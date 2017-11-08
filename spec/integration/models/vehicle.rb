@@ -20,7 +20,7 @@ class Vehicle
       vehicle.time_used += Time.now - start
     end
 
-    transition any => :stoped, :on => :stop
+    transition any => :stopped, :on => :stop
 
     event :park do
       transition [:idling, :first_gear] => :parked

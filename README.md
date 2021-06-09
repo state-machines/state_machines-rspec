@@ -2,7 +2,7 @@
 [![Gem Version](https://badge.fury.io/rb/state_machines-rspec.svg)](https://badge.fury.io/rb/state_machines-rspec)
 [![Build Status](https://travis-ci.org/state-machines/state_machines-rspec.svg?branch=master)](https://travis-ci.org/state-machines/state_machines-rspec)
 
-Custom RSpec matchers for [state-machines/state_machine](https://github.com/state-machines/state_machine).
+Custom RSpec matchers for [state-machines/state_machines](https://github.com/state-machines/state_machines).
 
 This repo is forked from [modocache/state_machine_rspec](https://github.com/modocache/state_machine_rspec).
 
